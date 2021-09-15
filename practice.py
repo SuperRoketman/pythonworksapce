@@ -13,3 +13,10 @@
 #     print("{0}, the coffee is ready. i called you {1} times.".format(customer, index))
 #     index += 1
 
+# customer = "thor"
+# person = "Unknown"
+
+# while person != customer:
+#      print("{0}, the coffee is ready.".format(customer))
+#      person = input("what is your name? ")
+
