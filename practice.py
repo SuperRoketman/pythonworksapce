@@ -1,15 +1,8 @@
-# weather = input("how is the weather?")
-# if weather == "rain" or weather == "snow":
-#     print("bring a umbrella")
-# elif weather == "dust":
-#     print("bring a mask")
-# else:
-#     print("bring nothing")
+# print("waiting : 1")
+# print("waiting : 2")
+# print("waiting : 3")
+# print("waiting : 4")
 
-temp = int(input("how is the tempertuer?"))
-if 30 <= temp:
-    print("it is too hot. stay in")
-elif 10<= temp and temp<30:
-    print("bring a coat")
-else:
-    print("it is too cold. stay in")
+
+for waiting_no in range(1, 101):
+    print("waitng : {0}".format(waiting_no))
