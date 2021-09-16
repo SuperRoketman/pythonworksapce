@@ -100,7 +100,7 @@
 # def std_weight(height, gender):
 #     a=0
 #     if gender == "남자":
-#         a = round(((height/100)**2)*22, 2)
+#         a = round(((height/100)**2)*22, 2) #round((((height/100)**2)*22)*100)/100 == round(((height/100)**2)*22, 2)
 #     else:
 #         a = round(((height/100)**2)*21, 2)
 #     print("키 {0}cm {1}의 표준체중은 {2}kg 입니다."\
@@ -121,3 +121,5 @@
 # gender = "남자"
 # weight = round(std_weight(height / 100, gender), 2)
 # print("키 {0}cm {1}의 표준체중은 {2}kg 입니다.".format(height, gender, weight))
+
+print(round((((2/100)**2)*22)*100)/100 == round(((2/100)**2)*22, 2))
