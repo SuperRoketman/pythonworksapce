@@ -1,125 +1,143 @@
-# def open_account():
-#     print("새로운 계좌가 생성되었습니다.")
+# print("Python", "Java", sep = ",", end = "?")
+# print("무엇이 더 재미있을까요?")
 
-# def deposit(balance, money): #입금
-#     print("the deposit has been completed. the balance is {0}KRW.".format(balance + money))
-#     return balance + money
+# import sys
+# print("Python", "Java", file=sys.stdout)
+# print("Python", "Java", file=sys.stderr)
 
-# def withdraw(balance, money):
-#     if balance >= money:
-#             print("the withdrawal has been completed. the balance is {0}KRW.".format(balance - money))
-#             return balance - money
-#     else:
-#         print("the withdrawal has failed. the balance is {0}KRW.".format(balance))
-#         return balance
+#시험성적
+# scores = {"math":0, "Eng":50, "coding":100}
+# for subject, score in scores.items():
+#     # print(subject, score)
+#     print(subject.ljust(8
+# ), str(score).rjust(4), sep=":")
 
-# def withdraw_night(balance, money):
-#     commission = 100
-#     return commission, balance - money - commission
+#은행 대기순번표
+#001 002 003 004
+# for num in range(1,21):
+#     print("wating : " + str(num).zfill(3))
 
-# balance = 0
-# a=0
-# a = deposit(balance, 1000)
-# balance = withdraw(balance, 2000)
-# balance = withdraw(balance, 500)
-# commission, balance = withdraw_night(balance, 500)
-# print("the commission is {0}KRW. the balance is {1}KRW.".format(commission, balance))
+# answer = input("enter any value : ")
+# print(type(answer))
+# print("the value entered is " + answer + ".")
+# 입력값은 항상 문자열.
 
-# def profile(name, age, main_lang):
-#     print("name : {0}\tage : {1}\tmain language : {2}"\
-#         .format(name, age, main_lang))
-
-# profile("YJS", 20, "Python")
-# profile("KTH", 25, "Java")
-
-# # 같은학교 같은 학년 같은 반 같은 수업 -> 기본
-
-# def profile(name, age = 17, main_lang = "Python"):
-#     print("name : {0}\tage : {1}\tmain language : {2}"\
-#         .format(name, age, main_lang))
-
-# profile("YJS")
-# profile("KTH")
-
-# def profile(name, age, main_lang):
-#     print(name, age, main_lang)
-
-# profile(name = "YJS", main_lang = "Python", age = 20)
-# profile(main_lang = "Java", age = 25, name = "KTH")
-
-# def profile(name, age, lang1, lang2, lang3, lang4, lang5):
-#     print("name : {0}\tage : {1}\t".format(name, age), end = " ")
-#     print(lang1, lang2, lang3, lang4, lang5)
-
-# def profile(name, age, *language):
-#     print("name : {0}\tage : {1}\t".format(name, age), end = " ")
-#     for lang in language:
-#         print(lang, end = " ")
-#     print()
+# # 빈 자리는 빈 공간으로 두고, 오른쪽 정렬을 하되, 총 10자리 공간을 확보
+# print("{0: >10}".format(500))
+# # 양수일 땐 +로 표시, 음수일 땐 -로 표시
+# print("{0: >+10}".format(500))
+# print("{0: >+10}".format(-500))
+# # 왼쪽 정렬하고, 빈 칸을 _로 채움.
+# print("{0:_<10}".format(500))
+# # 3자리 마다 콤마를 찍어주기
+# print("{0:,}".format(100000000000))
+# # 3자리 마다 콤마를 찍어주기
+# print("{0:+,}".format(100000000000))
+# # 3자리 마다 콤마를 찍어주기, 부호 붙이고, 자릿수 확보
+# # 돈이 많으면 행복하니 빈 자리는 ^로 채워주기
+# print("{0:^<+30,}".format(1000000 ))
+# # 소숫점 출력
+# print("{0:f}".format(5/3))
+# # 소숫 점을 특정 자리수 까지만 표시(소숫점 3째자리에서 반올림)
+# print("{0:.2f}".format(5/3))
 
 
-# profile("YJS", 20, "Python", "Java", "C", "C++", "C#", "JavaScript")
-# profile("KTH", 25, "Kotlin", "Swift")
+# score_file = open("score.txt", "w", encoding="utf8")
+# print("math : 0", file=score_file)
+# print("Eng : 50", file=score_file)
+# score_file.close()
 
-# gun = 10
+# score_file = open("score.txt", "a", encoding="utf8")
+# score_file.write("science : 80")
+# score_file.write("\ncoding : 100")
+# score_file.close()
 
-# def checkpoint(soldiers):
-#     global gun #전역 공간의 gun 사용
-#     gun = gun - soldiers
-#     print("[함수 내] 남은 총 : {0}".format(gun))
+# score_file = open("score.txt", "r", encoding="utf8")
+# print(score_file.read())
+# score_file.close()
 
-# def checkpoint_ret(gun, soldiers):
-#     gun = gun - soldiers
-#     print("[함수 내] 남은 총 : {0}".format(gun))
-#     return gun
+# score_file = open("score.txt", "r", encoding="utf8")
+# print(score_file.readline(), end="") #줄 별로 읽기, 한 줄 읽고 커서는 다음 줄로 이동
+# print(score_file.readline(), end="")
+# print(score_file.readline(), end="")
+# print(score_file.readline(), end="")
+# score_file.close()
 
-# print("전체 총 : {0}".format(gun))
-# # checkpoint(2)
-# gun = checkpoint_ret(gun, 2)
-# print("남은 총 : {0}".format(gun))
+# score_file = open("score.txt", "r", encoding="utf8")
+# while True:
+#     line = score_file.readline()
+#     if not line:
+#         break
+#     print(line, end="")
+# score_file.close()
 
-# Quiz) 표준 체중을 구하는 프로그램을 작성
+# score_file = open("score.txt", "r", encoding="utf8")
+# lines = score_file.readlines()
+# for line in lines:
+#     print(line, end="")
+# score_file.close()
 
-# *표준 체중 : 각 개인의 키에 적당한 체중
+# import pickle
+# profile_file = open("profile.pickle", "wb")
+# profile = {"name":"PMS", "age":30, "hobby":["Fb","Golf", "Coding"]}
+# print(profile)
+# pickle.dump(profile, profile_file) #프로필에 있는 정보를 파일에 저장
+# profile_file.close()
 
-# (성별에 따른 공식)
-#  남자 : 키(m) * 키(m) * 22
-#  여자 : 키(m) * 키(m) * 21
+# profile_file = open("profile.pickle", "rb")
+# profile = pickle.load(profile_file) #file에 있는 정보를 profile에 불러오기
+# print(profile)
+# profile_file.close()
 
-# 조건 1 : 표준 체중은 별도의 함수 내에서 계산
-#             * 함수명 : std_weight
-#             * 전달값 : 키(height), 성별(gender)
-# 조건 2 : 표준 체중은 소수점 둘째자리까지 표시
+# import pickle
 
-# (출력 예제)
-# 키 175cm 남자의 표준 체중은 67.38kg 입니다.
+# with open("profile.pickle", "rb") as profile_file:
+#     print(pickle.load(profile_file))
+
+# with open("study.txt", "w", encoding="utf8") as study_file:
+#     study_file.write("파이썬을 열심히 공부하고 있어요.")
+
+# with open("study.txt", "r", encoding="utf8") as study_file:
+#     print(study_file.read())
+
+# Quiz) 당신의 회사에서는 매주 1회 작성해야 하는 보고서가 있습니다.
+# 보고서는 항상 아래와 같은 형태로 출력되어야 합니다.
+
+#  - X 주차 주간 보고 -
+#  부서 : 
+#  이름 : 
+#  업무 요약 : 
+
+# 1주차부터 50주차까지의 보고서 파일을 만드는 프로그램을 작성하시오.
+
+# 조건 : 파일명은 '1주차.txt', '2주차.txt', ... 와 같이 만듭니다.
 
 
+#나
 
-##나
-# def std_weight(height, gender):
-#     a=0
-#     if gender == "남자":
-#         a = round(((height/100)**2)*22, 2) #round((((height/100)**2)*22)*100)/100 == round(((height/100)**2)*22, 2)
-#     else:
-#         a = round(((height/100)**2)*21, 2)
-#     print("키 {0}cm {1}의 표준체중은 {2}kg 입니다."\
-#         .format(height, gender, a))
+# for i in range(1,51):
+#     report_file = open("{0}주차.txt".format(i), "w", encoding="utf8")
+#     print(""" - {0}주차 주간 보고 - 
+#  부서 : 
+#  이름 : 
+#  업무 요약 : """.format(i), file = report_file)
+#     report_file.close()
 
-# std_weight(172, "남자")
+# for i in range(1, 51):
+#     with open("{0}주차.txt".format(i), "w", encoding="utf8") as report_file:
+#         report_file.write(""" - {0}주차 주간 보고 - 
+#  부서 : 
+#  이름 : 
+#  업무 요약 : """.format(i))
 
 
+#유튜바
 
-##유튜버
-# def std_weight(height, gender): #키는 m단위 (실수), 성별은 "남자" / "여자"
-#     if gender == "남자":
-#         return height * height * 22
-#     else:
-#         return height * height * 22
+# for i in range(1, 51):
+#     with open(str(i) + "주차.txt", "w", encoding="utf8") as report_file:
+#         report_file.write("- {0} 주차 주간 보고 -".format(i))
+#         report_file.write("\n부서 :")
+#         report_file.write("\n이름 :")
+#         report_file.write("\n업무 요약:")
 
-# height = 175 #cm
-# gender = "남자"
-# weight = round(std_weight(height / 100, gender), 2)
-# print("키 {0}cm {1}의 표준체중은 {2}kg 입니다.".format(height, gender, weight))
 
-print(round((((2/100)**2)*22)*100)/100 == round(((2/100)**2)*22, 2))
