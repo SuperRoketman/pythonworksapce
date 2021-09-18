@@ -1,143 +1,275 @@
-# print("Python", "Java", sep = ",", end = "?")
-# print("무엇이 더 재미있을까요?")
+# # # 마린 : 공격 유닛, 군인, 총을 쏠 수 있음.
+# # name = "마린" #유닛의 이름
+# # hp = 40 #유닛의 체력
+# # damage = 5 #유닛의 공격력
 
-# import sys
-# print("Python", "Java", file=sys.stdout)
-# print("Python", "Java", file=sys.stderr)
+# # print("{0} 유닛이 생성되었습니다.".format(name))
+# # print("체력 {0}, 공격력 {1}\n".format(hp, damage))
 
-#시험성적
-# scores = {"math":0, "Eng":50, "coding":100}
-# for subject, score in scores.items():
-#     # print(subject, score)
-#     print(subject.ljust(8
-# ), str(score).rjust(4), sep=":")
+# # # 탱크 : 공격 유닛, 탱크, 포를 쏠 수 있는데, 일반모드/시즈모드.
+# # tank_name = "탱크"
+# # tank_hp = 150
+# # tank_damage = 35
 
-#은행 대기순번표
-#001 002 003 004
-# for num in range(1,21):
-#     print("wating : " + str(num).zfill(3))
+# # print("{0} 유닛이 생성되었습니다.".format(tank_name))
+# # print("체력 {0}, 공격력 {1}\n".format(tank_hp, tank_damage))
 
-# answer = input("enter any value : ")
-# print(type(answer))
-# print("the value entered is " + answer + ".")
-# 입력값은 항상 문자열.
+# # tank2_name = "탱크"
+# # tank2_hp = 150
+# # tank2_damage = 35
 
-# # 빈 자리는 빈 공간으로 두고, 오른쪽 정렬을 하되, 총 10자리 공간을 확보
-# print("{0: >10}".format(500))
-# # 양수일 땐 +로 표시, 음수일 땐 -로 표시
-# print("{0: >+10}".format(500))
-# print("{0: >+10}".format(-500))
-# # 왼쪽 정렬하고, 빈 칸을 _로 채움.
-# print("{0:_<10}".format(500))
-# # 3자리 마다 콤마를 찍어주기
-# print("{0:,}".format(100000000000))
-# # 3자리 마다 콤마를 찍어주기
-# print("{0:+,}".format(100000000000))
-# # 3자리 마다 콤마를 찍어주기, 부호 붙이고, 자릿수 확보
-# # 돈이 많으면 행복하니 빈 자리는 ^로 채워주기
-# print("{0:^<+30,}".format(1000000 ))
-# # 소숫점 출력
-# print("{0:f}".format(5/3))
-# # 소숫 점을 특정 자리수 까지만 표시(소숫점 3째자리에서 반올림)
-# print("{0:.2f}".format(5/3))
+# # print("{0} 유닛이 생성되었습니다.".format(tank2_name))
+# # print("체력 {0}, 공격력 {1}\n".format(tank2_hp, tank2_damage))
+
+# # def attack(name, location, damage):
+# #     print("{0} : {1} 방향으로 적군을 공격합니다. [공격력, {2}]".format(\
+# #         name, location, damage))
+
+# # attack(name, "1시", damage)
+# # attack(tank_name, "1시", tank_damage)
+# # attack(tank2_name, "1시", tank2_damage)
+
+# # class Unit:
+# #     def __init__(self, name, hp, damage):
+# #         self.name = name
+# #         self.hp = hp
+# #         self.damage = damage
+# #         print("{0} 유닛이 생성되었습니다.".format(self.name))
+# #         print("체력 {0}, 공격력 {1}".format(self.hp, self.damage))
+
+# # marine1 = Unit("마린", 40, 5)
+# # marine2 = Unit("마린", 40, 5)
+# # tank = Unit("탱크", 150, 35)
+
+# # wraith1 = Unit("레이스", 80, 5)
+# # print("유닛 이름 : {0}, 공격력 : {1}".format(wraith1.name, wraith1.damage))
+
+# # wraith2 = Unit("빼앗은 레이스", 80, 5)
+# # wraith2.clocking = True
+
+# # if wraith2.clocking == True:
+# #     print("{0} 는 현재 클로킹 상태입니다.".format(wraith2.name))
+# from random import*
+
+# class Unit:
+#     def __init__(self, name, hp, speed):
+#         self.name = name
+#         self.hp = hp
+#         self.speed = speed
+#         print("{0} 유닛이 생성되었습니다.".format(name))
+
+#     def move(self, location):
+#         print("[지상 유닛 이동]")
+#         print("{0} : {1} 방향으로 이동합니다. [속도 {2}]"\
+#             .format(self.name, location, self.speed))
+
+#     def damaged(self, damage):
+#         print("{0} : {1} 데미지를 입었습니다.".format(self.name, damage))
+#         self.hp -= damage
+#         print("{0} : 현재 체력은 {1} 입니다.".format(self.name, self.hp))
+#         if self.hp <= 0:
+#             print("{0} : 파괴되었습니다.".format(self.name))
+
+# class AttackUnit(Unit):
+#     def __init__(self, name, hp, speed, damage):
+#         Unit.__init__(self, name, hp, speed)
+#         self.damage = damage
+
+#     def attack(self, location):
+#         print("{0} : {1} 방향으로 적군을 공격합니다. [공격력 {2}]"\
+#             .format(self.name, location, self.damage))
+
+# # 마린
+# class Marine(AttackUnit):
+#     def __init__(self):
+#         AttackUnit.__init__(self, "마린", 40, 1, 5)
+
+#     #stimpack : 일정 시간동안 이동 및 공격 속도를 증가, 체력 10 감소
+#     def stimpack(self):
+#         if self.hp>10:
+#             self.hp -= 10
+#             print("{0} : 스팀팩을 사용합니다. (HP 10 감소)".format(self.name))
+#         else:
+#             print("{0} : 체력이 부족하여 스탬팩을 사용하지 않습니다.".format(self.name))
+
+# # 탱크
+# class Tank(AttackUnit):
+#         # 시즈모드 : 탱크를 지상에 고정시켜, 더 높은 공격력으로 공격 가능, 이동 불가
+#     seize_developed = False
+
+#     def __init__(self):
+#         AttackUnit.__init__(self, "탱크", 150, 1, 35)
+#         self.seize_mode = False
+
+#     def set_seize_mode(self):
+#         if Tank.seize_developed == False:
+#             return
+
+#         # 현재 시즈모드가 아닐 때 -> 시즈모드
+#         if self.seize_mode == False:
+#             print("{0} : 시즈모드로 전환합니다.".format(self.name))
+#             self.damage *= 2
+#             self.seize_mode = True
+#         # 현재 시즈모드일 때 -> 시즈모드 해제
+#         else:
+#             print("{0} : 시즈모드를 해제합니다.".format(self.name))
+#             self.damage /= 2
+#             self.seize_mode = False
+
+    
 
 
-# score_file = open("score.txt", "w", encoding="utf8")
-# print("math : 0", file=score_file)
-# print("Eng : 50", file=score_file)
-# score_file.close()
+# class Flyable:
+#     def __init__(self, flying_speed):
+#         self.flying_speed = flying_speed
 
-# score_file = open("score.txt", "a", encoding="utf8")
-# score_file.write("science : 80")
-# score_file.write("\ncoding : 100")
-# score_file.close()
+#     def fly(self, name, location):
+#         print("{0} : {1} 방향으로 날아갑니다. [속도 : {2}]"\
+#             .format(name, location, self.flying_speed))
 
-# score_file = open("score.txt", "r", encoding="utf8")
-# print(score_file.read())
-# score_file.close()
+# class FlyableAttackUnit(AttackUnit, Flyable):
+#     def __init__(self, name, hp, damage, flying_speed):
+#         AttackUnit.__init__(self, name, hp, 0, damage) #지상 스피드 : 0
+#         Flyable.__init__(self, flying_speed)
 
-# score_file = open("score.txt", "r", encoding="utf8")
-# print(score_file.readline(), end="") #줄 별로 읽기, 한 줄 읽고 커서는 다음 줄로 이동
-# print(score_file.readline(), end="")
-# print(score_file.readline(), end="")
-# print(score_file.readline(), end="")
-# score_file.close()
+#     def move(self, location):
+#         print("[공중 유닛 이동]")
+#         self.fly(self.name, location)
 
-# score_file = open("score.txt", "r", encoding="utf8")
-# while True:
-#     line = score_file.readline()
-#     if not line:
-#         break
-#     print(line, end="")
-# score_file.close()
+# # 레이스
+# class Wraith(FlyableAttackUnit):
+#     def __init__(self):
+#         FlyableAttackUnit.__init__(self, "레이스", 80, 20, 5)
+#         self.clocked = False #클로킹 모드(해제상태)
 
-# score_file = open("score.txt", "r", encoding="utf8")
-# lines = score_file.readlines()
-# for line in lines:
-#     print(line, end="")
-# score_file.close()
+#     def clocking(self):
+#         if self.clocked == True: #클로킹 모드 -> 모드 해제
+#             print("{0} : 클로킹 모드를 해제합니다.".format(self.name))
+#             self.clocked == False
+#         else: #클로킹모드 해제 -> 설정
+#             print("{0} : 클로킹 모드를 설정 합니다.".format(self.name))
+#             self.clocked = True
 
-# import pickle
-# profile_file = open("profile.pickle", "wb")
-# profile = {"name":"PMS", "age":30, "hobby":["Fb","Golf", "Coding"]}
-# print(profile)
-# pickle.dump(profile, profile_file) #프로필에 있는 정보를 파일에 저장
-# profile_file.close()
+# def game_start():
+#     print("[알림] 새로운 게임을 시작합니다.")
 
-# profile_file = open("profile.pickle", "rb")
-# profile = pickle.load(profile_file) #file에 있는 정보를 profile에 불러오기
-# print(profile)
-# profile_file.close()
+# def game_over():
+#     print("Player : gg")
+#     print("[Player] 님이 게임에서 퇴장하셨습니다.")
 
-# import pickle
 
-# with open("profile.pickle", "rb") as profile_file:
-#     print(pickle.load(profile_file))
+# # 게임 시작
+# game_start()
 
-# with open("study.txt", "w", encoding="utf8") as study_file:
-#     study_file.write("파이썬을 열심히 공부하고 있어요.")
+# #유닛 생성 (마린 3, 탱크 2, 레이스 1)
+# m1 = Marine()
+# m2 = Marine()
+# m3 = Marine()
 
-# with open("study.txt", "r", encoding="utf8") as study_file:
-#     print(study_file.read())
+# t1 = Tank()
+# t2 = Tank()
 
-# Quiz) 당신의 회사에서는 매주 1회 작성해야 하는 보고서가 있습니다.
-# 보고서는 항상 아래와 같은 형태로 출력되어야 합니다.
+# w1 = Wraith()
 
-#  - X 주차 주간 보고 -
-#  부서 : 
-#  이름 : 
-#  업무 요약 : 
+# # 유닛 일괄 관리 (생성된 모든 유닛 append)
+# attack_units = []
+# attack_units.append(m1)
+# attack_units.append(m2)
+# attack_units.append(m3)
+# attack_units.append(t1)
+# attack_units.append(t2)
+# attack_units.append(w1)
 
-# 1주차부터 50주차까지의 보고서 파일을 만드는 프로그램을 작성하시오.
+# # 전군 이동
+# for unit in attack_units:
+#     unit.move("1시")
 
-# 조건 : 파일명은 '1주차.txt', '2주차.txt', ... 와 같이 만듭니다.
+# # 탱크 시즈모드 개발
+# Tank.seize_developed = True
+# print("[알림] 탱크 시즈 모드 개발이 완료되었습니다.")
+
+# # 공격 준비 (마린 : 스팀팩, 탱크 : 시즈, 레이스 : 클로킹)
+# for unit in attack_units:
+#     if isinstance(unit, Marine):
+#         unit.stimpack()
+#     elif isinstance(unit, Tank):
+#         unit.set_seize_mode()
+#     elif isinstance(unit, Wraith):
+#         unit.clocking()
+
+# # 전군 공격
+# for unit in attack_units:
+#     unit.attack("1시")
+
+# # 전군 피해
+# for unit in attack_units:
+#     unit.damaged(randint(5, 21)) # 공격은 랜덤으로 받음 (5~ 20)
+
+# # 게임 종료
+# game_over()
+
+# Quiz)
+
+# 출력예제
+# 총 3대의 매물이 있습니다.
+# 강남 아파트 매매 10억 2010년
+# 마포 오피스텔 전세 5억 2007년
+# 송파 빌라 월세 500/50 2000년
+
+# [코드]
 
 
 #나
 
-# for i in range(1,51):
-#     report_file = open("{0}주차.txt".format(i), "w", encoding="utf8")
-#     print(""" - {0}주차 주간 보고 - 
-#  부서 : 
-#  이름 : 
-#  업무 요약 : """.format(i), file = report_file)
-#     report_file.close()
+# class House:
+#     # 매물 초기화
+#     def __init__(self, location, house_type, deal_type, price, completion_year):
+#         self.location = location
+#         self.house_type = house_type
+#         self.deal_type = deal_type
+#         self.price = price
+#         self.completion_yaer = completion_year
 
-# for i in range(1, 51):
-#     with open("{0}주차.txt".format(i), "w", encoding="utf8") as report_file:
-#         report_file.write(""" - {0}주차 주간 보고 - 
-#  부서 : 
-#  이름 : 
-#  업무 요약 : """.format(i))
+#     #매물 정보 표시
+#     def show_detail(self):
+#         print("{0} {1} {2} {3} {4}"\
+#             .format(self.location, self.house_type, self.deal_type,\
+#                  self.price, self.completion_yaer))
 
+# h1 = House("강남", "아파트", "매매", "10억", "2010년")
+# h2 = House("마포", "오피스텔", "전세", "5억", "2007년")
+# h3 = House("송파", "빌라", "월세", "500/50", "2000년")
+# 매물들 = [h1, h2, h3]
+# print("총 3대의 매물이 있습니다.")
+# for i in 매물들:
+#     House.show_detail(i)
+    
+#    House.show_detail(i) == i.show_detail() 참고할 것
 
 #유튜바
 
-# for i in range(1, 51):
-#     with open(str(i) + "주차.txt", "w", encoding="utf8") as report_file:
-#         report_file.write("- {0} 주차 주간 보고 -".format(i))
-#         report_file.write("\n부서 :")
-#         report_file.write("\n이름 :")
-#         report_file.write("\n업무 요약:")
+# class House:
+#     # 매물 초기화
+#     def __init__(self, location, house_type, deal_type, price, completion_year):
+#         self.location = location
+#         self.house_type = house_type
+#         self.deal_type = deal_type
+#         self.price = price
+#         self.completion_yaer = completion_year
 
+#     #매물 정보 표시
+#     def show_detail(self):
+#         print(self.location, self.house_type, self.deal_type,\
+#                  self.price, self.completion_yaer)
 
+# houses = []
+# h1 = House("강남", "아파트", "매매", "10억", "2010년")
+# h2 = House("마포", "오피스텔", "전세", "5억", "2007년")
+# h3 = House("송파", "빌라", "월세", "500/50", "2000년")
+# houses.append(h1)
+# houses.append(h2)
+# houses.append(h3)
+
+# print("총 {0}대의 매물이 있습니다.".format(len(houses)))
+# for house in houses:
+#     house.show_detail()
