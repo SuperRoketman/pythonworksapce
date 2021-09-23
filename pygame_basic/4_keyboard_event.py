@@ -1,5 +1,4 @@
 import pygame
-from pygame.constants import K_UP
 
 pygame.init() # 초기화 (반드시 필요)
 
