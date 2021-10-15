@@ -11,4 +11,4 @@ browser.find_element_by_xpath('//*[@id="__next"]/div/div[1]/div[4]/div/div/div[2
 browser.find_element_by_xpath('//*[@id="__next"]/div/div[1]/div[10]/div[2]/div[1]/div[2]/div/div[2]/table/tbody/tr[5]/td[4]/button').click()
 browser.find_element_by_xpath('//*[@id="__next"]/div/div[1]/div[10]/div[2]/div[1]/div[2]/div/div[2]/table/tbody/tr[5]/td[5]/button').click()
 
-# 구글 항공권 웹이 바뀌어 뭐가 안됨.
+# 네이버 항공권 웹이 바뀌어 뭐가 안됨.
