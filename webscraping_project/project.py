@@ -46,6 +46,7 @@ def scrape_weather():
     print("="*60)
     print()
 
+
 def scrape_headline_news():
     print("[헤드라인 뉴스]")
     url = "https://news.naver.com"
