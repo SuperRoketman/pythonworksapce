@@ -24,4 +24,4 @@ pyautogui.sleep(1)
 
 w.restore()
 
-w.close()
+# w.close()
