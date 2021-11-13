@@ -3,6 +3,11 @@ from random import *
 
 # 레벨에 맞게 설정
 def setup(level):
+    global display_time
+
+    # 얼마동안 숫자를 보여줄지
+    display_time = 5 - (level // 3)
+    display_time = max(display_time, 1) # 1초 미만이면 1초로 처리
     # 얼마나 많은 숫자를 보여줄 것인가?
     number_count = (level // 3) + 5
     number_count = min(number_count, 20) # 20과 number_count 중 작은 수를 가짐
@@ -56,21 +61,76 @@ def display_start_screen():
     # 원을 흰색으로 그리는데 중심좌표는 start_button의 중심좌표를 따라가고,
     # 반지름은 60, 두께는 5
 
+    msg = game_font.render(f"{curr_level}", True, WHITE)
+    msg_rect = msg.get_rect(center=start_button.center)
+    
+    screen.blit(msg, msg_rect)
+
 # pos 에 해당하는 버튼 확인
 def check_buttons(pos):
-    global start
-    if start_button.collidepoint(pos):
+    global start, start_ticks
+
+    if start:
+        check_number_buttons(pos)
+    elif start_button.collidepoint(pos):
         start = True
+        start_ticks = pygame.time.get_ticks() # 타이머 시작 (현재 시간을 지정)
+
+def check_number_buttons(pos):
+    global start, hidden, curr_level
+
+    for button in number_buttons:
+        if button.collidepoint(pos):
+            if button == number_buttons[0]: # 올바른 숫자 클릭
+                print("Correct")
+                del number_buttons[0]
+                if not hidden:
+                    hidden = True # 숫자 숨김 처리
+            else: # 잘못된 숫자 클릭
+                game_over()
+            break
+
+    # 모든 숫자를 다 맞혔다면?
+    if len(number_buttons) == 0:
+        start = False
+        hidden = False
+        curr_level += 1
+        setup(curr_level)
+
+# 게임 종료 처리. 메시지도 보여줌
+def game_over():
+
+    global running
+    running = False
+
+    msg = game_font.render(f"Your level is {curr_level}", True, WHITE)
+    msg_rect = msg.get_rect(center=(screen_width/2, screen_height/2))
+    
+    screen.fill(BLACK)
+    screen.blit(msg, msg_rect)
+
+
+
 
 # 게임 화면 보여주기
 def display_game_screen():
-    for idx, rect in enumerate(number_buttons, start=1):
-        pygame.draw.rect(screen, GRAY, rect)
+    global hidden
 
+    if not hidden:
+        elapsed_time = (pygame.time.get_ticks() - start_ticks) / 1000 # ms -> sec
+        if elapsed_time > display_time:
+            hidden = True
+
+    for idx, rect in enumerate(number_buttons, start=1):
+        if hidden:
+            # 버튼 사각형 그리기
+            pygame.draw.rect(screen, WHITE, rect)
+
+        else:
         # 실제 숫자 텍스트
-        cell_text = game_font.render(str(idx), True, WHITE)
-        text_rect = cell_text.get_rect(center=rect.center)
-        screen.blit(cell_text, text_rect)
+            cell_text = game_font.render(str(idx), True, WHITE)
+            text_rect = cell_text.get_rect(center=rect.center)
+            screen.blit(cell_text, text_rect)
 
 # 초기화
 pygame.init()
@@ -90,12 +150,17 @@ WHITE = (255, 255, 255)
 GRAY = (50, 50, 50)
 
 number_buttons = [] # 플레이어가 눌러야 할 버튼 리스트
+curr_level = 1
+display_time = None # 숫자를 보여주는 시간
+start_ticks = None # 시간 계산 (현재 시간 정보를 저장)
 
 # 게임 시작 여부
 start = False
+# 숫자 숨김 여부 (사용자가 1을 클릭했거나, 보여주는 시간 초과했을 때)
+hidden = False
 
 # 게임 시작 전에 게임 설정 함수 수행
-setup(1)
+setup(curr_level)
 
 # 게임 루프
 running = True # 게임이 실행중인가?
@@ -125,6 +190,9 @@ while running:
 
     # 화면 업데이트
     pygame.display.update()
+
+# 5초 대기후 게임 종료
+pygame.time.delay(5000)
 
 # 게임 종료
 pygame.quit()
