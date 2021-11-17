@@ -1,10 +1,8 @@
-# 집게 발사
-# 현재 위치로부터 집게를 쭉 뻗는 동작
-# 화면 밖으로 뻗어나가면 다시 돌아오도록 처리
-# 뻗을 때 속도, 돌아올 때 속도 적용
+# 충돌처리
 
 import os
 import pygame
+import math
 
 # 집게 클래스
 class Claw(pygame.sprite.Sprite):
@@ -58,22 +56,36 @@ class Claw(pygame.sprite.Sprite):
 
 # 보석 클래스
 class Gemstone(pygame.sprite.Sprite):
-    def __init__(self, image, position):
+    def __init__(self, image, position, price, speed):
         super().__init__()
         self.image = image
         self.rect = image.get_rect(center=position)
+        self.price = price
+        self.speed = speed
 
+    def set_position(self, position, angle):
+        r = self.rect.size[0] // 2 # 원형 이미지 기준으로 반지름
+        rad_angle = math.radians(angle) # 각도
+        to_x = r * math.cos(rad_angle) # 삼각형의 밑변
+        to_y = r * math.sin(rad_angle) # 삼각형의 높이
+
+        self.rect.center = (position[0] + to_x, position[1] + to_y)
 
 def setup_gemstone():
+    small_gold_price, small_gold_speed = 100, 5
+    big_gold_price, big_gold_price = 300, 2
+    stone_price, stone_speed = 10, 2
+    diamond_price, diamond_speed = 600, 7
+
     # 작은 금
-    small_gold = Gemstone(gemstone_images[0], (200, 380)) # 0번째 이미지를 200, 380 위치에
+    small_gold = Gemstone(gemstone_images[0], (200, 380), small_gold_price, small_gold_speed) # 0번째 이미지를 200, 380 위치에
     gemstone_group.add(small_gold) # 그룹에 추가
     # 큰 금
-    gemstone_group.add(Gemstone(gemstone_images[1], (300, 500)))
+    gemstone_group.add(Gemstone(gemstone_images[1], (300, 500), big_gold_price, big_gold_price))
     # 돌
-    gemstone_group.add(Gemstone(gemstone_images[2], (300, 380)))
+    gemstone_group.add(Gemstone(gemstone_images[2], (300, 380), stone_price, stone_speed))
     # 다이아몬드
-    gemstone_group.add(Gemstone(gemstone_images[3], (900, 420)))
+    gemstone_group.add(Gemstone(gemstone_images[3], (900, 420), diamond_price, diamond_speed))
 
 pygame.init()
 screen_width = 1280
@@ -86,6 +98,7 @@ clock = pygame.time.Clock()
 # 게임 관련 변수
 default_offset_x_claw = 40 # 중심점으로부터 집게까지의 기본 x 간격
 to_x = 0 # x 좌표 기준으로 집게 이미지를 이동시킬 값 저장 변수
+caught_gemstone = None
 
 # 속도 변수
 move_speed = 12 # 발사할 때 이동 속도 (x 좌표 기준으로 증가되는 값)
@@ -136,6 +149,24 @@ while running:
     if claw.offset.x < default_offset_x_claw: # 원위치에 오면
         to_x = 0
         claw.set_init_state() # 처음상태로 되돌림
+
+        if caught_gemstone: # 잡힌 보석이 있다면
+            # update_score(caught_gemstone.price) # 점수 업데이트 처리 (나중에)
+            gemstone_group.remove(caught_gemstone) # 그룹에서 잡힌 보석 제외
+            caught_gemstone = None
+
+    if not caught_gemstone: # 잡힌 보석이 없다면 충돌 체크
+        for gemstone in gemstone_group:
+            if claw.rect.colliderect(gemstone.rect):
+                caught_gemstone = gemstone # 잡힌 보석
+                to_x = -gemstone.speed # 잡힌 보석의 속도에 - 한 값을 이동속도로 설정
+                break
+
+
+    if caught_gemstone:
+        caught_gemstone.set_position(claw.rect.center, claw.angle)
+
+
 
     screen.blit(background, (0, 0))
 
