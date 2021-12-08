@@ -51,23 +51,28 @@ hiden_answer = []
 # print(hiden_answer)
 # print(' '.join(hiden_answer))
 
-a = ["a", "a", "a", "b", "c", "b", "c", "a"]
+a = ["a", "a", "a", "a", "b", "b", "b", "c", "c","d", "d"]
 b = []
+c = []
 for _ in a:
     b.append('_')
-inputs = str(input())
-i = 0
-if inputs in a:
-    cnt = a.count(inputs)
-    while i <= cnt:
-        a[a.index(inputs)] = ['_']
-        b[a.index(inputs)] = list(inputs)
-        i += 1
-else:
-    pass
-print(a)
-print(b)
+    c.append('_')
 
-
+while a != c:
+    inputs = input()
+    i = 0
+    if inputs in a:
+        while i <= a.count(inputs):
+            b[a.index(inputs)] = inputs
+            a[a.index(inputs)] = '_'
+            i += 1
+    else:
+        print("Wrong")
+    print(a)
+    print(b)
+print("Success")
+# while i <= a.count(inputs)+1: 일 경우 a가 3개만 지워지고 한 번 더 a를 입력 시 왜 ValueError: 'a' is not in list
+# while i <= a.count(inputs)+2: 일 경우 c랑 d 입력 시 ValueError: 'c(아니면 d)' is not in list
+# while i <= a.count(inputs)일 경우 3개 이상은 한 번에 못지우는가 (특정 패턴이 있음.)
 
 # 하고싶은 것 : input이 answer_list에 있으면 answer_list의 input 값의 인덱스를 파악하고 그걸 hiden_answer 인덱스에 넣고 값을 input으로 바꿈
