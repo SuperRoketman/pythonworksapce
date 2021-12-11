@@ -24,18 +24,19 @@ class Word:
         self.answer = answer
 
     def show_question(self):
-        new_word = self.new_word
-        selection1 = self.selection1
-        selection2 = self.selection2
         print(f"""
-"{new_word}" 의 뜻은?
-1. {selection1}
-2. {selection2}""")
+"{self.new_word}" 의 뜻은?
+1. {self.selection1}
+2. {self.selection2}""")
     
-    def check_answer(self):
-        pass
+    def check_answer(self, inputs):
+        if self.answer == inputs:
+            print("정답입니다.")
+        else:
+            print("오답입니다.")
 
 
 word = Word("얼죽아", "얼어 죽어도 아메리카노", "얼굴만은 죽어도 아기피부", 1)
 
 word.show_question()
+word.check_answer(int(input("=> ")))
