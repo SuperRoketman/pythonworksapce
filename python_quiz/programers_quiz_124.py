@@ -10,6 +10,7 @@ def solution(n):
     while n > 0:
         n, mod = divmod(n - 1, 3) # divmod 함수는 몫과 나머지를 튜플 데이터 타입으로 반환
         # 몫인 n이 양수일 때까진 계속 나눠서 구하는 것
+        print(n, mod)
         mod += 1
         if mod == 3:
             mod = 4
@@ -19,3 +20,6 @@ def solution(n):
     # 역순인 진수를 뒤집어 줘야 원래 변환 하고자하는 base가 출력
     
 print(solution(500000000))
+
+# 효율성 문제에서 왜 틀리지 싶었는데 13번째 줄의 프린트 때문이었음...ㅋㅋㅋ 
+# 진수 변환을 이용해서 3진수로 변환 후 가뿐히 통과
